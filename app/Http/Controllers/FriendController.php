@@ -29,7 +29,9 @@ class FriendController extends Controller
 
     $friendrequests = Friend::where('friend_id', Auth::user()->id)->get();
         if($friendrequests->count() > 0){
-            return view('friend.requests')->with('friendrequests', $friendrequests);
+            return view('friend.requests')
+            ->with('user_friend', $user_friend)
+            ->with('friendrequests', $friendrequests);
         }elseif($friends->count() > 0){
         return view('friend.friends')
         ->with('friends', $friends)

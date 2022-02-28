@@ -61,18 +61,27 @@
               class="user__avatar story__avatar"
                  src="{{ asset('app/images/avatar3.jpg')}}"
                  alt=""
-               />
+               /> 
                 
               @endif
-              
-            <h4 style="color: rgb(36, 34, 34); margin-bottom: 10px">{{$friend->user->fname}} {{$friend->lname}}<small>Sent you a friend request</small></h4> 
+              @if ($user_friend->count() > 0)
+              @foreach ($user_friend as $fr)
+                  @if ($fr->friend_id == $friend->friend_id)
+                  <h4 style="color: rgb(36, 34, 34); margin-bottom: 10px">Message</h4>                   
 
-          <a href="{{route('friend.confirm', ['id' => $friend->user->id])}}" class="pad">Confirm Request</a>
-          <a href="{{route('request.cancel', ['id' => $friend->friend_id])}}" class="pad" style="background: rgb(204, 207, 13)">Delete Request</a>
-          </div>
+                  @endif
+              @endforeach              
+              @else
+
+              <h4 style="color: rgb(36, 34, 34); margin-bottom: 10px">{{$friend->user->fname}} {{$friend->lname}}<small>Sent you a friend request</small></h4> 
+              
+              <a href="{{route('friend.confirm', ['id' => $friend->user->id])}}" class="pad">Confirm Request</a>
+              <a href="{{route('request.cancel', ['id' => $friend->friend_id])}}" class="pad" style="background: rgb(204, 207, 13)">Delete Request</a>
+              @endif
+            </div>
           <!-- friends ends -->
           @endforeach
-          
+
           
           
         </div>

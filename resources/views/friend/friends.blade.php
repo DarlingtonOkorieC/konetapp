@@ -38,9 +38,42 @@
   
       @endif
      @if ($user_friend->count() > 0)
-         
+     <div class="storyReel">
+     
 
-      @elseif ($friends->count() > 0)    
+            
+      <!-- friends starts -->
+          @foreach (Auth::user()->friends as $friend)
+              
+
+      <div class="box" style="text-align:center; margin-bottom:4px">
+      @if (isset($friend->user->profile->passport))
+        <img
+          class="user__avatar story__avatar"
+             src="{{ asset($friend->user->profile->passport)}}"
+             alt=""
+           />
+           
+          @else
+          <img
+          class="user__avatar story__avatar"
+             src="{{ asset('app/images/avatar3.jpg')}}"
+             alt=""
+           />
+            
+          @endif
+          
+        <h4 style="color: rgb(36, 34, 34); margin-bottom: 10px">{{$friend->user->fname}} {{$friend->user->lname}}</h4>
+      <a href="{{route('friend.add', ['id' => $friend->id])}}" class="pad font">Message</a>
+      </div>
+      <!-- friends ends -->
+      @endforeach
+      
+      
+      
+    </div>    
+
+      @if ($friends->count() > 0)    
         <div class="storyReel">
      
 
