@@ -66,7 +66,7 @@
               @endif
               @if ($user_friend->count() > 0)
               @foreach ($user_friend as $fr)
-                  @if ($fr->friend_id == $friend->friend_id)
+                  @if ($fr->friend_id == $friend->user_id && $fr->user_id == $friend->friend_id)
                   <h4 style="color: rgb(36, 34, 34); margin-bottom: 10px">Message</h4>                   
 
                   @endif
